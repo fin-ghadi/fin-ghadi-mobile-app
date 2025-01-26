@@ -8,28 +8,27 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { DrawerActions, useNavigation } from "@react-navigation/native"; // Import useNavigation
-
-import WeatherCard from "@/components/home-page/weatherCard";
-import HorizantalScrollActivities from "@/components/home-page/HorizantalScrollActivities";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from expo vector icons
 import VerticalScrollActivities from "@/components/home-page/verticalScrollActivities";
-import { IconSymbol } from "@/components/ui/IconSymbol"; // Import your IconSymbol component
+import HorizantalScrollActivities from "@/components/home-page/HorizantalScrollActivities";
+import WeatherCard from "@/components/home-page/weatherCard";
 
 export default function HomeScreen() {
-  const navigation = useNavigation(); // Access the navigation object
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        {/* Drawer Toggle Button */}
+        {/* Drawer Toggle Button (Icon Only) */}
         <TouchableOpacity
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} // Toggle the drawer
+          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
           style={styles.drawerButton}
         >
-          <IconSymbol name="line.horizontal.3" size={28} color="#FFFFFF" />  
+          <Ionicons name="menu" size={28} color="#FFFFFF" />
         </TouchableOpacity>
-     
+
         {/* Logo and Title */}
         <Image
           source={require("@/assets/images/FG-logo.png")}
@@ -128,7 +127,8 @@ const styles = StyleSheet.create({
   drawerButton: {
     position: "absolute",
     left: 16, // Position the button on the left side
-    top: Platform.OS === "ios" ? 50 : 30, // Adjust position based on platform
+    top: 45, // Adjust position based on platform
+    zIndex: 1, // Ensure the button is above other elements
   },
   logo: {
     width: 60,
