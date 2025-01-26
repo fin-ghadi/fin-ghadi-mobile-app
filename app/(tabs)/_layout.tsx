@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import CustomHeader from "@/components/customHeader"; // Adjust the import path as needed
 
 export default function DrawerLayout() {
   const colorScheme = useColorScheme();
@@ -17,7 +18,7 @@ export default function DrawerLayout() {
         drawerStyle: {
           backgroundColor: Colors[colorScheme ?? "light"].background,
         },
-        headerShown: false, // Hide the header if needed
+        header: ({ navigation }) => <CustomHeader navigation={navigation} />, // Use the custom header here
       }}
     >
       <Drawer.Screen

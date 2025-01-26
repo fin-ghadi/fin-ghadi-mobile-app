@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import ActivityCard from "@/components/home-page/activityCard"; // Adjust the import path if needed
 
 type Activity = {
+  id : string; // Unique ID of the activity
   image: any; // Image for the activity
   title: string; // Title of the activity
   description: string; // Description of the activity
@@ -16,11 +17,11 @@ const HorizontalScrollActivities: React.FC<HorizontalScrollActivitiesProps> = ({
   activities,
 }) => {
   const screenWidth = Dimensions.get('window').width; // Get the screen width
-  const cardWidth = screenWidth; // Adjust card width as a percentage of the screen width
+  const cardWidth = screenWidth/1.2; // Adjust card width as a percentage of the screen width
 
   return (
     <View style={styles.container}>
-      {/* ScrollView to display activities in a loop */}
+   
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false} // Remove the scroll indicator
@@ -29,6 +30,7 @@ const HorizontalScrollActivities: React.FC<HorizontalScrollActivitiesProps> = ({
         {activities.map((activity, index) => (
           <View key={index} style={[styles.cardContainer, { width: cardWidth }]}>
             <ActivityCard
+              id={activity.id}
               image={activity.image}
               title={activity.title}
               description={activity.description}

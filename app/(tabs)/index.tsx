@@ -16,53 +16,48 @@ import WeatherCard from "@/components/home-page/weatherCard";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        {/* Drawer Toggle Button (Icon Only) */}
-        <TouchableOpacity
-          onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-          style={styles.drawerButton}
-        >
-          <Ionicons name="menu" size={28} color="#FFFFFF" />
-        </TouchableOpacity>
-
-        {/* Logo and Title */}
-        <Image
-          source={require("@/assets/images/FG-logo.png")}
-          style={styles.logo}
-        />
-        <Text style={styles.headerTitle}>FIN GHADI</Text>
+      {/* Greeting Section */}
+      <View style={styles.greetingContainer}>
+        <Text style={styles.greetingTitle}>Welcome Back, Simo! 🌟</Text>
+        <Text style={styles.greetingQuote}>
+          "Adventure is worthwhile in itself. Every journey opens new horizons."
+        </Text>
+        <Text style={styles.greetingAuthor}>- Amelia Earhart</Text>
       </View>
 
-      {/* Content wrapped in ScrollView */}
       <ScrollView contentContainerStyle={styles.content}>
         {/* Weather Card */}
-        <WeatherCard />
+        <View style={{ marginRight: -35 }}>
+          <WeatherCard />
+        </View>
 
-        {/* Most Recommended Activities Section */}
+        {/* Most Recommended Activities */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Most Recommended Activities</Text>
           <HorizantalScrollActivities
             activities={[
               {
+                id: "1",
                 image: undefined,
                 title: "Activity 1",
                 description: "Description 1",
               },
               {
+                id: "2",
                 image: undefined,
                 title: "Activity 2",
                 description: "Description 2",
               },
               {
+                id: "3",
                 image: undefined,
                 title: "Activity 3",
                 description: "Description 3",
               },
               {
+                id: "4",
                 image: undefined,
                 title: "Activity 4",
                 description: "Description 4",
@@ -71,27 +66,31 @@ export default function HomeScreen() {
           />
         </View>
 
-        {/* Other Recommended Activities Section */}
+        {/* Other Recommended Activities */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Other Recommended Activities</Text>
           <VerticalScrollActivities
             activities={[
               {
+                id: "1",
                 image: undefined,
                 title: "Activity 1",
                 description: "Description 1",
               },
               {
+                id: "2",
                 image: undefined,
                 title: "Activity 2",
                 description: "Description 2",
               },
               {
+                id: "3",
                 image: undefined,
                 title: "Activity 3",
                 description: "Description 3",
               },
               {
+                id: "4",
                 image: undefined,
                 title: "Activity 4",
                 description: "Description 4",
@@ -103,42 +102,37 @@ export default function HomeScreen() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5",
   },
-  header: {
-    backgroundColor: "#0096FF",
-    height: Platform.OS === "ios" ? 120 : 100,
-    justifyContent: "center",
-    alignItems: "center",
+  greetingContainer: {
+    padding: 16,
     paddingTop: Platform.OS === "ios" ? 40 : 20,
-    flexDirection: "row", // Aligns the logo and title horizontally
+    backgroundColor: "#F5F5F5",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5, // Adds shadow on Android
+    marginBottom: 16, // Removed elevation for shadow
   },
-  drawerButton: {
-    position: "absolute",
-    left: 16, // Position the button on the left side
-    top: 45, // Adjust position based on platform
-    zIndex: 1, // Ensure the button is above other elements
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    marginRight: 8, // Adds space between logo and title
-  },
-  headerTitle: {
-    fontSize: 27,
+  greetingTitle: {
+    fontSize: 28,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    textAlign: "center",
+    color: "#333",
+    marginBottom: 8,
+  },
+  greetingQuote: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "#666",
+    fontStyle: "italic",
+    marginBottom: 4,
+  },
+  greetingAuthor: {
+    fontSize: 14,
+    textAlign: "center",
+    color: "#666",
   },
   content: {
     flexDirection: "column",

@@ -1,31 +1,41 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 
 type ActivityCardProps = {
+  id: string; // The ID of the activity (used for navigation)
   image: any; // The image for the activity
   title: string; // The activity title
   description: string; // A short description of the activity
 };
 
 const ActivityCard: React.FC<ActivityCardProps> = ({
+  id,
   image,
   title,
   description,
 }) => {
+  const router = useRouter();
+
+  // Handle card press
+  const handlePress = () => {
+    router.push(`/activity-detail/${id}`); // Navigate to the activity detail page
+  };
+
   return (
-    <View style={styles.card}>
+    <TouchableOpacity onPress={handlePress} style={styles.card}>
       {/* Activity Image */}
       <Image source={image} style={styles.image} />
 
-      {/* Divider between the image and the bottom content */}
+      {/* Divider */}
       <View style={styles.divider} />
 
-      {/* Activity Title and Description */}
+      {/* Activity Content */}
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

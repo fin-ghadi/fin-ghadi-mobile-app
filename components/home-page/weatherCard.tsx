@@ -44,9 +44,6 @@ const WeatherCard: React.FC = () => {
 
   return (
     <View style={styles.card}>
-      {/* Date inside the Card */}
-
-      {/* Left Section: Location and Temperature */}
       <View style={styles.leftSection}>
         <Text style={styles.dateText}>
           {moment().format("MMMM Do YYYY, h:mm:ss a")}
@@ -55,7 +52,6 @@ const WeatherCard: React.FC = () => {
         <Text style={styles.cardText}>26°</Text>
       </View>
 
-      {/* Right Section: Weather Icon and Description */}
       <View style={styles.rightSection}>
         <Image source={image} style={styles.weatherIcon} />
         <Text style={styles.weatherDescription}>{description}</Text>

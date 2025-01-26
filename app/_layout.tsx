@@ -1,39 +1,78 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import "react-native-reanimated";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from "@/hooks/useColorScheme";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+  const [fontsLoaded] = useFonts({
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
+    if (fontsLoaded) {
+      SplashScreen.hideAsync(); // Hide the splash screen once fonts are loaded
     }
-  }, [loaded]);
+  }, [fontsLoaded]);
 
-  if (!loaded) {
-    return null;
+  if (!fontsLoaded) {
+    return null; // Don't render anything until fonts are loaded
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />{" "}
+      {/* Dynamic status bar style */}
       <Stack>
+        {/* Hide the header for the tabs layout */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+
+        {/* Add a custom header for the not-found screen */}
+        <Stack.Screen
+          name="+not-found"
+          options={{
+            title: "Not Found",
+            headerStyle: {
+              backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
+            },
+            headerTintColor: colorScheme === "dark" ? "#ffffff" : "#000000",
+          }}
+        />
+
+        {/* Add more screens with custom headers if needed */}
+        <Stack.Screen
+          name="auth/sign-in/page"
+          options={{
+            title: "Sign In",
+            headerStyle: {
+              backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
+            },
+            headerTintColor: colorScheme === "dark" ? "#ffffff" : "#000000",
+          }}
+        />
+        <Stack.Screen
+          name="auth/sign-up/page"
+          options={{
+            title: "Sign Up",
+            headerStyle: {
+              backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
+            },
+            headerTintColor: colorScheme === "dark" ? "#ffffff" : "#000000",
+          }}
+        />
       </Stack>
-      <StatusBar style="auto" />
     </ThemeProvider>
   );
 }
