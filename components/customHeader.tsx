@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginRight: 8, // Adds space between logo and title
   },
   headerTitle: {
-    fontSize: 27,
+    fontSize: 22,
     fontWeight: "bold",
     color: "#FFFFFF",
   },

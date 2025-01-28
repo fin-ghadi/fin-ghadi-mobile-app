@@ -1,19 +1,19 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
 type ActivityCardProps = {
   id: string; // The ID of the activity (used for navigation)
-  image: any; // The image for the activity
-  title: string; // The activity title
-  description: string; // A short description of the activity
+  name: string; // The name of the activity
+  address: string; // The address of the activity
+  rating: number; // The rating of the activity (e.g., 4.5)
 };
 
 const ActivityCard: React.FC<ActivityCardProps> = ({
   id,
-  image,
-  title,
-  description,
+  name,
+  address,
+  rating,
 }) => {
   const router = useRouter();
 
@@ -24,16 +24,19 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.card}>
-      {/* Activity Image */}
-      <Image source={image} style={styles.image} />
+      {/* Activity Name */}
+      <Text style={styles.name}>{name}</Text>
 
       {/* Divider */}
       <View style={styles.divider} />
 
-      {/* Activity Content */}
-      <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+      {/* Activity Address */}
+      <Text style={styles.address}>{address}</Text>
+
+      {/* Activity Rating */}
+      <View style={styles.ratingContainer}>
+        <Text style={styles.ratingText}>{rating}</Text>
+        <Text style={styles.ratingLabel}>/5</Text>
       </View>
     </TouchableOpacity>
   );
@@ -51,38 +54,43 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
-    alignItems: "center",
+    padding: 16, // Add padding inside the card
     justifyContent: "center",
+    alignItems: "center",
   },
-  image: {
-    width: "100%",
-    height: 120, // Adjust the height of the image
-    borderTopLeftRadius: 12,
-    borderTopRightRadius: 12,
-    resizeMode: "cover", // Adjust the image size properly
+  name: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#333",
+    textAlign: "center",
+    marginBottom: 8, // Space between name and divider
   },
-  // Divider style
   divider: {
     width: "100%",
     height: 1,
     backgroundColor: "#DDDDDD", // Light gray color for the divider
-    marginVertical: 8, // Space between the image and the content
+    marginVertical: 8, // Space between the name and address
   },
-  content: {
-    padding: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 16, // Slightly smaller font size
-    fontWeight: "600",
-    color: "#333",
-    marginBottom: 5,
-  },
-  description: {
-    fontSize: 12, // Smaller font size for description
+  address: {
+    fontSize: 14,
     color: "#777",
     textAlign: "center",
+    marginBottom: 8, // Space between address and rating
+  },
+  ratingContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ratingText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#FFA500", // Orange color for the rating
+  },
+  ratingLabel: {
+    fontSize: 14,
+    color: "#777",
+    marginLeft: 4, // Space between rating and "/5"
   },
 });
 

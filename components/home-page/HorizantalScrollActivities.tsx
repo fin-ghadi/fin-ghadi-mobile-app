@@ -2,38 +2,40 @@ import React from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import ActivityCard from "@/components/home-page/activityCard"; // Adjust the import path if needed
 
-type Activity = {
-  id : string; // Unique ID of the activity
-  image: any; // Image for the activity
-  title: string; // Title of the activity
-  description: string; // Description of the activity
+type ActivityCardProps = {
+  id: string; // The ID of the activity (used for navigation)
+  name: string; // The name of the activity
+  address: string; // The address of the activity
+  rating: number; // The rating of the activity (e.g., 4.5)
 };
 
 type HorizontalScrollActivitiesProps = {
-  activities: Activity[]; // Array of activity objects
+  activities: ActivityCardProps[]; // Array of activity objects
 };
 
 const HorizontalScrollActivities: React.FC<HorizontalScrollActivitiesProps> = ({
   activities,
 }) => {
-  const screenWidth = Dimensions.get('window').width; // Get the screen width
-  const cardWidth = screenWidth/1.2; // Adjust card width as a percentage of the screen width
+  const screenWidth = Dimensions.get("window").width; // Get the screen width
+  const cardWidth = screenWidth / 1.2; // Adjust card width as a percentage of the screen width
 
   return (
     <View style={styles.container}>
-   
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false} // Remove the scroll indicator
         contentContainerStyle={styles.scrollContainer} // Optional: control the inner container's padding/margin
       >
         {activities.map((activity, index) => (
-          <View key={index} style={[styles.cardContainer, { width: cardWidth }]}>
+          <View
+            key={index}
+            style={[styles.cardContainer, { width: cardWidth }]}
+          >
             <ActivityCard
               id={activity.id}
-              image={activity.image}
-              title={activity.title}
-              description={activity.description}
+              address={activity.address}
+              name={activity.name}
+              rating={activity.rating}
             />
           </View>
         ))}

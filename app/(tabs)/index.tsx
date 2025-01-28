@@ -4,18 +4,77 @@ import {
   Text,
   StyleSheet,
   Platform,
-  Image,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons from expo vector icons
+import { useNavigation } from "@react-navigation/native";
+import WeatherCard from "@/components/home-page/weatherCard";
 import VerticalScrollActivities from "@/components/home-page/verticalScrollActivities";
 import HorizantalScrollActivities from "@/components/home-page/HorizantalScrollActivities";
-import WeatherCard from "@/components/home-page/weatherCard";
+
+type ActivityCardProps = {
+  id: string; // The ID of the activity (used for navigation)
+  name: string; // The name of the activity
+  address: string; // The address of the activity
+  rating: number; // The rating of the activity (e.g., 4.5)
+};
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+
+  const recommendedActivities: ActivityCardProps[] = [
+    {
+      id: "1",
+      name: "Hiking Adventure",
+      address: "Mountain Peak, Nature Valley",
+      rating: 4.8,
+    },
+    {
+      id: "2",
+      name: "City Museum",
+      address: "Downtown Avenue, City Center",
+      rating: 4.5,
+    },
+    {
+      id: "3",
+      name: "Art Gallery Tour",
+      address: "Art District, Street 12",
+      rating: 4.7,
+    },
+    {
+      id: "4",
+      name: "Beach Volleyball",
+      address: "Sunny Beach, Coastline Road",
+      rating: 4.9,
+    },
+  ];
+
+  const otherActivities: ActivityCardProps[] = [
+    {
+      id: "5",
+      name: "Cooking Workshop",
+      address: "Chef's Hub, Gourmet Lane",
+      rating: 4.6,
+    },
+    {
+      id: "6",
+      name: "Yoga Retreat",
+      address: "Zen Gardens, Peace Boulevard",
+      rating: 4.4,
+    },
+    {
+      id: "7",
+      name: "Rock Climbing",
+      address: "Adventure Park, Hill Top",
+      rating: 4.8,
+    },
+    {
+      id: "8",
+      name: "Photography Walk",
+      address: "Historic Town, Old Street",
+      rating: 4.7,
+    },
+  ];
+
   return (
     <View style={styles.container}>
       {/* Greeting Section */}
@@ -36,72 +95,19 @@ export default function HomeScreen() {
         {/* Most Recommended Activities */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Most Recommended Activities</Text>
-          <HorizantalScrollActivities
-            activities={[
-              {
-                id: "1",
-                image: undefined,
-                title: "Activity 1",
-                description: "Description 1",
-              },
-              {
-                id: "2",
-                image: undefined,
-                title: "Activity 2",
-                description: "Description 2",
-              },
-              {
-                id: "3",
-                image: undefined,
-                title: "Activity 3",
-                description: "Description 3",
-              },
-              {
-                id: "4",
-                image: undefined,
-                title: "Activity 4",
-                description: "Description 4",
-              },
-            ]}
-          />
+          <HorizantalScrollActivities activities={recommendedActivities} />
         </View>
 
         {/* Other Recommended Activities */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Other Recommended Activities</Text>
-          <VerticalScrollActivities
-            activities={[
-              {
-                id: "1",
-                image: undefined,
-                title: "Activity 1",
-                description: "Description 1",
-              },
-              {
-                id: "2",
-                image: undefined,
-                title: "Activity 2",
-                description: "Description 2",
-              },
-              {
-                id: "3",
-                image: undefined,
-                title: "Activity 3",
-                description: "Description 3",
-              },
-              {
-                id: "4",
-                image: undefined,
-                title: "Activity 4",
-                description: "Description 4",
-              },
-            ]}
-          />
+          <VerticalScrollActivities activities={otherActivities} />
         </View>
       </ScrollView>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F5F5F5",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginBottom: 16, // Removed elevation for shadow
+    marginBottom: 16,
   },
   greetingTitle: {
     fontSize: 28,
@@ -139,13 +145,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   section: {
-    marginBottom: 24, // Adds space between sections
+    marginBottom: 24,
   },
   sectionTitle: {
     fontSize: 22,
     fontWeight: "700",
     color: "#333333",
-    marginBottom: 16, // Adds space below the title
-    paddingLeft: 8, // Adds padding to the left of the title
+    marginBottom: 16,
+    paddingLeft: 8,
   },
 });

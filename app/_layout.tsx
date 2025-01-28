@@ -53,9 +53,9 @@ export default function RootLayout() {
 
         {/* Add more screens with custom headers if needed */}
         <Stack.Screen
-          name="auth/sign-in/page"
+          name="auth/sign-in"
           options={{
-            title: "Sign In",
+            title: "Sign In",headerShown: false,
             headerStyle: {
               backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
             },
@@ -63,9 +63,9 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="auth/sign-up/page"
+          name="auth/sign-up"
           options={{
-            title: "Sign Up",
+            title: "Sign Up",headerShown: false,
             headerStyle: {
               backgroundColor: colorScheme === "dark" ? "#1a1a1a" : "#ffffff",
             },
